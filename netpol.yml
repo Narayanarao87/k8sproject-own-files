@@ -6,7 +6,7 @@ metadata:
 spec:
   podSelector:
     matchLabels:
-      app: nginx
+      app: myk8s
 
   policyTypes:
     - Ingress
@@ -25,7 +25,7 @@ spec:
     - to:
         - podSelector:
             matchLabels:
-              app: app-database
+              app: myk8sdb
       ports:
         - protocol: TCP
           port: 3306
