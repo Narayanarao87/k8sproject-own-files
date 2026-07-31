@@ -20,7 +20,7 @@ spec:
             - containerPort: 3306
           envFrom:
             - secretRef:
-                name: mysecrets
+                name: bankapp-db-secret
           resources:
             requests:
               cpu: "100m"
