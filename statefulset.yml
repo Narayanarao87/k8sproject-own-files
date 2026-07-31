@@ -1,39 +1,37 @@
 apiVersion: apps/v1
 kind: StatefulSet
-metdata:
- name: myapp2
+metadata:
+  name: myapp2
 spec:
   replicas: 3
   selector:
-    app: myk8sdb
+    matchLabels:
+      app: myk8sdb
+  serviceName: myservice2   # Headless service usually required for StatefulSet
   template:
-    matadata:
+    metadata:
       labels:
-        name: myk8sdb
-spec:
-  container:
-    name: cont2
-    image: narayanarao8790/k8ssecond:dbimage
-    ports: 3306
-      -containerPort: 3306
-
-  -SecretRef:
-      name: mysecrets
-
-  resources:
-    requests:
-      cpu: "100m"
-      memory: "128Mi"
-    limits:
-      cpu: "200m
-      memory: "256Mi"
-  
-  volumes:
-    -name: mypvc1
-     persistentVolumeClaim:
-       claimName: mypvc
-
-  volumeMounts:
-      - name: mysql-data
-        mountPath: /usr/share/nginx/html/
-
+        app: myk8sdb
+    spec:
+      containers:
+        - name: cont2
+          image: narayanarao8790/k8ssecond:dbimage
+          ports:
+            - containerPort: 3306
+          envFrom:
+            - secretRef:
+                name: mysecrets
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "200m"
+              memory: "256Mi"
+          volumeMounts:
+            - name: mysql-data
+              mountPath: /usr/share/nginx/html/
+      volumes:
+        - name: mysql-data
+          persistentVolumeClaim:
+            claimName: mypvc
