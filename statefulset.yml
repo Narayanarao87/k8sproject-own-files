@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metdata:
+ name: myapp2
+spec:
+  replicas: 3
+  selector:
+    app: myk8sdb
+  template:
+    matadata:
+      labels:
+        name: myk8sdb
+spec:
+  container:
+    name: cont2
+    image: narayanarao8790/k8ssecond:dbimage
+    ports: 3306
+      -containerPort: 3306
+
+  -SecretRef:
+      name: mysecrets
+
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "128Mi"
+    limits:
+      cpu: "200m
+      memory: "256Mi"
+  
+  volumes:
+    -name: mypvc1
+     persistentVolumeClaim:
+       claimName: mypvc
+
+  volumeMounts:
+      - name: mysql-data
+        mountPath: /usr/share/nginx/html/
+
