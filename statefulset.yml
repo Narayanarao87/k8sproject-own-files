@@ -3,12 +3,11 @@ kind: StatefulSet
 metadata:
   name: myapp2
 spec:
-  serviceName: mysqldb
+  serviceName: myservice2
   replicas: 3
   selector:
     matchLabels:
       app: myk8sdb
-  serviceName: myservice2   # Headless service usually required for StatefulSet
   template:
     metadata:
       labels:
