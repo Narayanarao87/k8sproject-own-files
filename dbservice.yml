@@ -3,9 +3,9 @@ kind: Service
 metadata:
   name: myservice2
 spec:
-  clusterip: none
+  clusterIP: None   # correct spelling and case
   selector:
-    app: njnm
-    ports:
-      -port: 3306
-       targetPort: 3306
+    app: myk8sdb
+  ports:
+    - port: 3306
+      targetPort: 3306
