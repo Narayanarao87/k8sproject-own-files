@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: myservice2
 spec:
-  clusterIP: None   # correct spelling and case
+  clusterIP: None   
   selector:
     app: myk8sdb
   ports:
